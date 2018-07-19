@@ -1,9 +1,8 @@
 #include "myDevices.h"
 
-void myDevices::setup(int numOfWidthDiveces, int numOfHeightDiveces, bool bDebug) {
+void myDevices::setup(int numOfWidthDiveces, int numOfHeightDiveces) {
 	receiver.setup(PORT);
 	ofBackground(0);
-	debug = bDebug;
 	set_units_x = numOfWidthDiveces;
 	set_units_y = numOfHeightDiveces;
 	ofColor initcolor(100,100,100);
@@ -14,12 +13,12 @@ void myDevices::setup(int numOfWidthDiveces, int numOfHeightDiveces, bool bDebug
 	
 }
 
-void myDevices::update() {
+void myDevices::update(string address) {
 	while (receiver.hasWaitingMessages()){
 		ofxOscMessage m;
 		receiver.getNextMessage(&m);
 		for (int i = 0; i < (set_units_x * set_units_y); i++) {
-			if (m.getAddress() == "/bg_color_zhongyi/"+ ofToString(i)) {
+			if (m.getAddress() == address + ofToString(i)) {
 				set_unit_colors[i].r = m.getArgAsInt(0);
 				set_unit_colors[i].g = m.getArgAsInt(1);
 				set_unit_colors[i].b = m.getArgAsInt(2);
@@ -42,7 +41,7 @@ void myDevices::drawSimulator(int pos_x, int pos_y) {
 }
 
 void myDevices::drawLog(int pos_x, int pos_y) {
-	ofDrawBitmapString("-----KontactLab-----", pos_x, pos_y);
+	ofDrawBitmapString("-----KontactLab-----RECEIVER-----", pos_x, pos_y);
 	for (int i = 0; i < set_unit_colors.size(); i++) {
 		ofDrawBitmapString(ofToString(i), pos_x, pos_y + (i + 1) * 12);
 		ofDrawBitmapString(set_unit_colors[i], pos_x + 50, pos_y + (i + 1) * 12);

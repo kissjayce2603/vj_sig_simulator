@@ -10,12 +10,15 @@ class myDevices{
 		int set_units_x; 
 		int set_units_y;
 		bool debug;
-		vector<ofColor> set_unit_colors;
+		
 		ofxOscReceiver receiver;
 		
 	public:
-		void setup(int numOfWidthDiveces, int numOfHeightDiveces, bool bDebug);
-		void update();
+
+		vector<ofColor> set_unit_colors;
+
+		void setup(int numOfWidthDiveces, int numOfHeightDiveces);
+		void update(string address);
 		void drawSimulator(int pos_x, int pos_y);
 		void drawLog(int pos_x, int pos_y);
 };

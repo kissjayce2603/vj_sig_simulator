@@ -17,3 +17,9 @@ drawSimulator(int pos_x, int pos_y)
 // show the data. aug can place you want in the screen.
 drawLog(int pos_x, int pos_y)
 ```
+
+
+```
+// All the data will sync in this array.
+vector<ofColor> set_unit_colors
+```
